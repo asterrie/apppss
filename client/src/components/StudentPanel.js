@@ -75,10 +75,10 @@ export default function StudentPanel({ selectedExtendedSubjects, setSelectedExte
           <div className="class-section">
             <p><strong>Klasa:</strong> {editing ? (
               <select value={tempClassName} onChange={(e) => setTempClassName(e.target.value)}>
-                <option value="1">1A</option>
-                <option value="2">2A</option>
-                <option value="3">3A</option>
-                <option value="4">4A</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             ) : (
               className
