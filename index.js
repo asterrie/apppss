@@ -20,13 +20,6 @@ mongoose.connect(mongoURI, {
 .then(() => console.log('Połączono z MongoDB'))
 .catch((err) => console.error('Błąd połączenia z MongoDB:', err));
 
-
-const authRoutes = require('./routes/auth'); // import routera autoryzacji
-
-app.use(express.json());  // middleware do parsowania JSON z body requestów
-
-app.use('/api/auth', authRoutes); 
-
 // Socket.io
 io.on('connection', (socket) => {
   console.log('Nowe połączenie:', socket.id);
