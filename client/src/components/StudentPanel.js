@@ -4,30 +4,27 @@ import './StudentPanel.css';
 const defaultProfilePic = 'https://i.pinimg.com/236x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg';
 
 const allSubjects = [
-  'Matematyka',
-  'Fizyka',
-  'Chemia',
-  'Informatyka',
-  'Biologia',
-  'Historia',
-  'Język polski',
-  'Język angielski',
-  'Wiedza o społeczeństwie',
-  'Język Niemiecki',
-  'Język hiszpański',
-  'Geografia',
+  'Matematyka', 'Fizyka', 'Chemia', 'Informatyka', 'Biologia',
+  'Historia', 'Język polski', 'Język angielski', 'Wiedza o społeczeństwie',
+  'Język Niemiecki', 'Język hiszpański', 'Geografia',
 ];
 
-const isMentor = true; // lub false
-
+const isMentor = true;
 
 export default function StudentPanel({ selectedExtendedSubjects, setSelectedExtendedSubjects }) {
   const [editing, setEditing] = useState(false);
   const [tempSelected, setTempSelected] = useState(selectedExtendedSubjects);
 
-  // Przykładowe dane ucznia
-  const className = '3A'; // tutaj możesz podłączyć prawdziwe dane użytkownika
-  const points = 123;     // przykładowe punkty
+  const [name, setName] = useState('Alicja');
+  const [tempName, setTempName] = useState(name);
+
+  const [profilePic, setProfilePic] = useState(defaultProfilePic);
+  const [tempProfilePic, setTempProfilePic] = useState(defaultProfilePic);
+
+  const [className, setClassName] = useState('3');
+  const [tempClassName, setTempClassName] = useState('3');
+
+  const points = 123;
 
   useEffect(() => {
     setTempSelected(selectedExtendedSubjects);
@@ -43,28 +40,57 @@ export default function StudentPanel({ selectedExtendedSubjects, setSelectedExte
 
   const saveChanges = () => {
     setSelectedExtendedSubjects(tempSelected);
+    setName(tempName);
+    setProfilePic(tempProfilePic);
+    setClassName(tempClassName);
     setEditing(false);
   };
 
   return (
     <div className="student-panel-wrapper">
       <header className="student-panel-header">
-        <h1>Hej, Alicja!</h1>
+        {editing ? (
+          <div className="name-edit">
+            <label>Imię: </label>
+            <input value={tempName} onChange={(e) => setTempName(e.target.value)} />
+          </div>
+        ) : (
+          <h1>Hej, {name}!</h1>
+        )}
       </header>
 
       <div className="profile-section">
-        <img src={defaultProfilePic} alt="Profilowe" className="profile-pic" />
+        <img src={profilePic} alt="Profilowe" className="profile-pic" />
+        {editing && (
+          <div className="profile-pic-edit">
+            <label>Link do zdjęcia profilowego:</label>
+            <input
+              value={tempProfilePic}
+              onChange={(e) => setTempProfilePic(e.target.value)}
+            />
+          </div>
+        )}
+
         <div className="profile-data">
-          <p className="class-info"><strong>Klasa:</strong> {className}</p>
+          <div className="class-section">
+            <p><strong>Klasa:</strong> {editing ? (
+              <select value={tempClassName} onChange={(e) => setTempClassName(e.target.value)}>
+                <option value="1">1A</option>
+                <option value="2">2A</option>
+                <option value="3">3A</option>
+                <option value="4">4A</option>
+              </select>
+            ) : (
+              className
+            )}</p>
+          </div>
 
           <div className="subjects-section">
             <div className="subjects-header">
               <h2>Przedmioty rozszerzone</h2>
               {isMentor && <span className="flare small-flare">(jesteś mentorem)</span>}
               {!editing && (
-                <button onClick={() => setEditing(true)} className="edit-button">
-                  Edytuj
-                </button>
+                <button onClick={() => setEditing(true)} className="edit-button">Edytuj</button>
               )}
             </div>
 
