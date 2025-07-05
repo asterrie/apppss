@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://peerx.netlify.app/',
+    origin: 'https://peerx.netlify.app',
   },
 });
 const mongoose = require('mongoose');
@@ -38,6 +38,11 @@ io.on('connection', (socket) => {
 
     console.log(`Wiadomość w pokoju ${room}: ${message}`);
   });
+
+  socket.on('message', (msg) => {
+  console.log('Odebrano wiadomość:', msg); // ⬅ zobacz co przychodzi
+  setMessages((prev) => [...prev, msg]);
+});
 
   socket.on('disconnect', () => {
     console.log('Rozłączono:', socket.id);

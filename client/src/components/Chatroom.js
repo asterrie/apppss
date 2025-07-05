@@ -30,7 +30,7 @@ export default function Chatroom({ room, goBack }) {
   const sendMessage = () => {
     if (message.trim() === '') return;
     // Wysyłamy wiadomość z polem sender: 'me'
-    socket.emit('message', { room: roomName, message, sender: 'me' });
+    socket.emit('message', { room: roomName, message });
     setMessage('');
   };
 
