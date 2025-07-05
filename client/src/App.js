@@ -11,7 +11,8 @@ export default function App() {
   const location = useLocation();
   const [level, setLevel] = useState('Podstawa');
   const [selectedRoom, setSelectedRoom] = useState(null);
-  
+  const API_URL = process.env.REACT_APP_API_URL;
+
   // Przechowujemy rozszerzone przedmioty na poziomie App
   const [selectedExtendedSubjects, setSelectedExtendedSubjects] = useState([
     'Matematyka',

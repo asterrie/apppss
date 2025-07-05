@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import './Chatroom.css';
 
+
 const socket = io('http://localhost:4000');
-const isMentor = true; // lub false
+
 
 
 export default function Chatroom({ room, goBack }) {
@@ -49,8 +50,6 @@ export default function Chatroom({ room, goBack }) {
               key={idx}
               className={`message-bubble ${sender === 'me' ? 'my-message' : 'other-message'}`}
             >
-              <span className="username">{msg.username}</span>
-              {msg.isMentor && <span className="flare">mentor</span>}
               {messageText}
             </div>
           );
