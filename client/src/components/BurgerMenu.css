@@ -1,0 +1,34 @@
+.burger-container {
+  position: fixed;
+  top: 0px;      /* mniejsze odsunięcie od góry */
+  right: 0px;    /* mniejsze odsunięcie od prawej */
+  z-index: 1100;
+}
+
+
+.burger-icon {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.burger-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #9aaeb5;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.burger-menu a {
+  text-decoration: none;
+  color: #000;
+  font-family: 'Courier New', Courier, monospace;
+}

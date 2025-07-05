@@ -1,0 +1,42 @@
+/* ChatroomList.css */
+
+h2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center; /* wyśrodkowanie przycisków */
+}
+
+button {
+  background-color: #7e96a0;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  min-width: 120px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #5f747b;
+}
+
+/* Styl ikony burger menu */
+.burger-icon {
+  color: black !important;
+  cursor: pointer;
+  font-size: 24px; /* dopasuj rozmiar */
+}

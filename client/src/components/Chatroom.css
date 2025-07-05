@@ -1,0 +1,97 @@
+.chatroom-wrapper {
+  background-color: #9aaeb5;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: #000;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.message-bubble {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  max-width: 60%;
+  word-wrap: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  color: #000;
+}
+
+.other-message {
+  background-color: #c3c7c6;
+  align-self: flex-start;
+}
+
+.my-message {
+  background-color: #dcddd8;
+  align-self: flex-end;
+}
+
+.message {
+  background: #7e96a0;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 0.5rem;
+  max-width: 60%;
+}
+
+.input-area {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.input-area button {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: none;
+  background: #7e96a0;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.flare {
+  background-color: #f28b82; /* np. delikatny czerwony */
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 8px;
+  user-select: none;
+  vertical-align: middle;
+  display: inline-block;
+}
+

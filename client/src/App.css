@@ -1,0 +1,73 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ikonka burgera */
+.burger-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Panel menu */
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* ukryte na starcie */
+  width: 250px;
+  height: 100%;
+  background-color: #9aaeb5;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  padding: 2rem 1rem;
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.burger-menu.open {
+  left: 0; /* wysunięte */
+}
+
+/* Style przycisków pokoi możesz dać w ChatroomList lub tu */
+

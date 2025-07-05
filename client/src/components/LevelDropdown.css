@@ -1,0 +1,23 @@
+.level-dropdown {
+  position: static;   /* albo static, jeśli ma się przewijać */
+  top: 20px;
+  right: 20px;
+  background-color: #526e79;
+  padding: 0.5rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: #ffffff;
+  z-index: 9999;
+}
+
+
+.level-dropdown label {
+  font-weight: bold;
+}
+
+.level-dropdown select {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+}
