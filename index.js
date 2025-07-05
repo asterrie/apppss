@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: 'https://peerx.netlify.app/',
   },
 });
 const mongoose = require('mongoose');
@@ -44,4 +44,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(4000, () => console.log('Server działa na http://localhost:4000'));
+server.listen(process.env.PORT || 4000, '0.0.0.0', () =>
+  console.log(`Server działa na http://localhost:4000`)
+);

@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import './Chatroom.css';
 
 
-const socket = io('process.env.REACT_APP_API_URL');
+const socket = io('https://peerx-chat.onrender.com');
 
 
 
