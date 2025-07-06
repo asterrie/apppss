@@ -94,16 +94,15 @@
 }
 
 .subjects-list {
-  list-style-type: disc;
-  padding-left: 20px;
-  margin-top: 0.8rem;
-  line-height: 1.5;
-  font-size: 1.1rem;
+  list-style-type: disc;    /* Kropki przed elementami */
+  padding-left: 1.5rem;     /* Trochę wcięcia dla kropek */
+  display: block;           /* Wyłącza ewentualny flex */
 }
 
 .subjects-list li {
-  margin-bottom: 0.3rem;
+  margin-bottom: 4px;       /* Odstęp między przedmiotami */
 }
+
 
 .small-flare {
   font-size: 0.7rem;
@@ -159,5 +158,14 @@
 
 .student-panel-header h1 {
     font-size: 1.5rem; /* lub 1.2rem jeśli za duże — dobierz wedle wyglądu */
+  }
+
+  .subjects-list {
+    padding-left: 1rem; /* mniejsze wcięcie na kropki */
+  }
+
+  .subjects-list li {
+    margin-bottom: 2px;  /* mniejszy odstęp */
+    font-size: 0.9rem;   /* mniejszy tekst, jeśli chcesz */
   }
 
