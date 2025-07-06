@@ -1,35 +1,30 @@
 import React, { useState } from 'react';
-import { useLocation, Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LevelDropdown from './components/LevelDropdown';
 import ChatroomList from './components/ChatroomList';
 import Chatroom from './components/Chatroom';
 import StudentPanel from './components/StudentPanel';
 import BurgerMenu from './components/BurgerMenu';
 
-// Importujesz widoki logowania i rejestracji
-import Login from './components/Login';
-import Register from './components/Register';
-
 export default function App() {
   const location = useLocation();
   const [level, setLevel] = useState('Podstawa');
   const [selectedRoom, setSelectedRoom] = useState(null);
 
+  // Przechowujemy rozszerzone przedmioty na poziomie App
   const [selectedExtendedSubjects, setSelectedExtendedSubjects] = useState([
     'Matematyka',
     'Fizyka',
     'Informatyka',
   ]);
 
-  // 🟢 Ukrywasz dropdown i burger menu na stronach logowania/rejestracji
-  const hideUI = location.pathname === '/student-panel' || 
-                 location.pathname === '/login' || 
-                 location.pathname === '/register';
+  const hideDropdown = location.pathname === '/student-panel';
 
   return (
     <>
-      {!hideUI && <LevelDropdown level={level} setLevel={setLevel} />}
-      {!hideUI && <BurgerMenu />}
+      {!hideDropdown && <LevelDropdown level={level} setLevel={setLevel} />}
+      <BurgerMenu />
 
       <Routes>
         <Route
@@ -44,12 +39,11 @@ export default function App() {
               <ChatroomList
                 level={level}
                 setSelectedRoom={setSelectedRoom}
-                selectedExtendedSubjects={selectedExtendedSubjects}
+                selectedExtendedSubjects={selectedExtendedSubjects} // przekazujemy props
               />
             )
           }
         />
-
         <Route
           path="/student-panel"
           element={
@@ -59,9 +53,6 @@ export default function App() {
             />
           }
         />
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );

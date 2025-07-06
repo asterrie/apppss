@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './StudentPanel.css';
-import { useAuth } from '../context/AuthContext';
-
 
 const defaultProfilePic = 'https://i.pinimg.com/236x/2c/47/d5/2c47d5dd5b532f83bb55c4cd6f5bd1ef.jpg';
 
@@ -12,9 +10,6 @@ const allSubjects = [
 ];
 
 const isMentor = true;
-
-const { user } = useAuth();
-
 
 export default function StudentPanel({ selectedExtendedSubjects, setSelectedExtendedSubjects }) {
   const [editing, setEditing] = useState(false);
@@ -29,7 +24,7 @@ export default function StudentPanel({ selectedExtendedSubjects, setSelectedExte
   const [className, setClassName] = useState('3');
   const [tempClassName, setTempClassName] = useState('3');
 
-  const points = TBA;
+  const points = 123;
 
   useEffect(() => {
     setTempSelected(selectedExtendedSubjects);
