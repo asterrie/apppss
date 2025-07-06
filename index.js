@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const authRouter = require('./routes/auth');
+const authRouter = require('../routes/auth');
 
 const app = express();
 const server = http.createServer(app);
