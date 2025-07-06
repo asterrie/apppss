@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import './Chatroom.css';
 
-export default function Chatroom({ room, goBack }) {
+export default function Chatroom({ room, goBack, selectedExtendedSubjects, userName }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const { subject, level } = room;
@@ -24,7 +24,7 @@ export default function Chatroom({ room, goBack }) {
 
   useEffect(() => {
     if (!socketRef.current) return;
-    setMessages([]);  // wyczyść stare wiadomości
+    setMessages([]); // Wyczyść stare wiadomości
     socketRef.current.emit('joinRoom', roomName);
   }, [roomName]);
 
@@ -44,12 +44,22 @@ export default function Chatroom({ room, goBack }) {
           const messageText = typeof msg === 'string' ? msg : msg.message || '';
           const sender = typeof msg === 'string' ? 'other' : msg.sender || 'other';
 
+          const isMentor = level === 'Podstawa' && selectedExtendedSubjects?.includes(subject);
+
           return (
             <div
               key={idx}
-              className={`message-bubble ${sender === 'me' ? 'my-message' : 'other-message'}`}
+              className={`message-wrapper ${sender === 'me' ? 'my-message' : 'other-message'}`}
             >
-              {messageText}
+              {sender === 'me' && (
+                <div className="message-meta">
+                  <span className="message-username">{userName}</span>
+                  {isMentor && <span className="mentor-flare">(mentor)</span>}
+                </div>
+              )}
+              <div className="message-bubble">
+                {messageText}
+              </div>
             </div>
           );
         })}

@@ -91,6 +91,20 @@ body {
   font-family: 'Courier New', Courier, monospace;
 }
 
+.message-meta {
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.mentor-flare {
+  margin-left: 6px;
+  background: #ffc107;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
 
 /* === Mobile (do 768px) === */
 @media (max-width: 768px) {
@@ -121,3 +135,14 @@ body {
     font-size: 1rem;
   }
 }
+
+.message-meta {
+    font-size: 0.65rem;
+    margin-bottom: 1px;
+  }
+
+  .mentor-flare {
+    margin-left: 4px;
+    padding: 0 3px;
+    font-size: 0.6rem;
+  }

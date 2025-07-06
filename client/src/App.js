@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import LevelDropdown from './components/LevelDropdown';
@@ -12,12 +12,15 @@ export default function App() {
   const [level, setLevel] = useState('Podstawa');
   const [selectedRoom, setSelectedRoom] = useState(null);
 
-  // Przechowujemy rozszerzone przedmioty na poziomie App
-  const [selectedExtendedSubjects, setSelectedExtendedSubjects] = useState([
-    'Matematyka',
-    'Fizyka',
-    'Informatyka',
-  ]);
+  const [selectedExtendedSubjects, setSelectedExtendedSubjects] = useState([]);
+
+  const [username, setUsername] = useState(() => {
+    return localStorage.getItem('username') || 'Gość';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('username', username);
+  }, [username]);
 
   const hideDropdown = location.pathname === '/student-panel';
 
@@ -34,12 +37,14 @@ export default function App() {
               <Chatroom
                 room={{ subject: selectedRoom, level }}
                 goBack={() => setSelectedRoom(null)}
+                selectedExtendedSubjects={selectedExtendedSubjects}
+                userName={username} // Przekazujemy username do Chatroom
               />
             ) : (
               <ChatroomList
                 level={level}
                 setSelectedRoom={setSelectedRoom}
-                selectedExtendedSubjects={selectedExtendedSubjects} // przekazujemy props
+                selectedExtendedSubjects={selectedExtendedSubjects}
               />
             )
           }
@@ -50,6 +55,8 @@ export default function App() {
             <StudentPanel
               selectedExtendedSubjects={selectedExtendedSubjects}
               setSelectedExtendedSubjects={setSelectedExtendedSubjects}
+              username={username}       // Przekazujemy username do StudentPanel
+              setUsername={setUsername} // Przekazujemy setter do zmiany username
             />
           }
         />
