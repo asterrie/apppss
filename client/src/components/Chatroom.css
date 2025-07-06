@@ -4,6 +4,8 @@
   padding: 2rem;
   font-family: 'Courier New', Courier, monospace;
   color: #000;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .back-button {
@@ -12,78 +14,68 @@
   color: #000;
   font-weight: bold;
   cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
   margin-bottom: 1rem;
 }
 
 h2 {
+  text-align: center;
   margin-bottom: 1rem;
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  border: 2px solid #ccc;
   border-radius: 10px;
+  background: #fafafa;
   padding: 1rem;
-  max-height: 400px;
+  height: 400px;
+  max-height: 60vh;
   overflow-y: auto;
   margin-bottom: 1rem;
 }
-.message-bubble {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  max-width: 60%;
-  word-wrap: break-word;
-  font-family: 'Courier New', Courier, monospace;
-  color: #000;
-}
 
-.other-message {
-  background-color: #c3c7c6;
-  align-self: flex-start;
+.message-bubble {
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word;
 }
 
 .my-message {
-  background-color: #dcddd8;
+  background: #d1e7dd;
   align-self: flex-end;
 }
 
-.message {
-  background: #7e96a0;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  margin-bottom: 0.5rem;
-  max-width: 60%;
+.other-message {
+  background: #e2e3e5;
+  align-self: flex-start;
 }
 
 .input-area {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
 }
 
 .input-area input {
   flex: 1;
-  padding: 0.5rem;
+  padding: 10px;
   border-radius: 20px;
-  border: none;
-  font-family: 'Courier New', Courier, monospace;
+  border: 1px solid #ccc;
 }
 
 .input-area button {
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   border-radius: 20px;
   border: none;
-  background: #7e96a0;
+  background: #007bff;
   color: #fff;
-  font-weight: bold;
   cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .flare {
-  background-color: #f28b82; /* np. delikatny czerwony */
+  background-color: #f28b82;
   color: white;
   font-size: 0.75rem;
   font-weight: bold;
@@ -95,3 +87,35 @@ h2 {
   display: inline-block;
 }
 
+/* === MEDIA QUERIES === */
+
+@media (max-width: 768px) {
+  .chatroom-wrapper {
+    padding: 1rem;
+  }
+
+  .messages {
+    height: 50vh;
+    max-height: 50vh;
+    padding: 0.8rem;
+  }
+
+  .message-bubble {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+
+  .input-area {
+    flex-direction: column;
+  }
+
+  .input-area input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .input-area button {
+    width: 100%;
+    padding: 10px;
+  }
+}
