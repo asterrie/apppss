@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+const authRouter = require('./routes/auth');
 
 const app = express();
 const server = http.createServer(app);
@@ -19,6 +20,10 @@ mongoose.connect(mongoURI, {
 })
 .then(() => console.log('Połączono z MongoDB'))
 .catch((err) => console.error('Błąd połączenia z MongoDB:', err));
+
+// **DODAJ TO:**
+app.use(express.json());
+app.use('/api/auth', authRouter);
 
 // Socket.io
 io.on('connection', (socket) => {
