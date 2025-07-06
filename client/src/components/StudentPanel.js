@@ -12,68 +12,76 @@ const allSubjects = [
 
 const isMentor = true;
 
-export default function StudentPanel({ selectedExtendedSubjects, setSelectedExtendedSubjects }) {
-  const { user } = useAuth(); // 👉 TERAZ JEST WEWNĄTRZ
+export default function StudentPanel() {
+  const { user, setUser } = useAuth();
 
   const [editing, setEditing] = useState(false);
+  const [tempName, setTempName] = useState('');
+  const [tempClassName, setTempClassName] = useState('1');
+  const [tempSelected, setTempSelected] = useState([]);
 
-  // Jeśli nie edytujesz, bierz dane z usera z AuthContext
-  const name = user?.username || 'Gość';
-  const className = user?.className || '-';
-  const tempSelected = user?.selectedSubjects || [];
-
-  // Do zmiany zdjęcia — możesz to rozszerzyć jak chcesz:
-  const [profilePic, setProfilePic] = useState(defaultProfilePic);
-  const [tempProfilePic, setTempProfilePic] = useState(defaultProfilePic);
-
-  const [tempName, setTempName] = useState(name);
-  const [tempClassName, setTempClassName] = useState(className);
-
-  const points = 123; // przykładowo
+  useEffect(() => {
+    if (user) {
+      setTempName(user.username || '');
+      setTempClassName(user.className || '1');
+      setTempSelected(user.extendedSubjects || []);
+    }
+  }, [user]);
 
   const toggleSubject = (subject) => {
     if (tempSelected.includes(subject)) {
-      setSelectedExtendedSubjects(tempSelected.filter((s) => s !== subject));
+      setTempSelected(tempSelected.filter((s) => s !== subject));
     } else {
-      setSelectedExtendedSubjects([...tempSelected, subject]);
+      setTempSelected([...tempSelected, subject]);
     }
   };
 
   const saveChanges = () => {
-    // W pełnej wersji powinieneś zapisać zmiany w AuthContext
+    setUser({
+      ...user,
+      username: tempName,
+      className: tempClassName,
+      extendedSubjects: tempSelected,
+    });
     setEditing(false);
   };
 
   return (
     <div className="student-panel-wrapper">
-      <header className="student-panel-header">
-        <h1>Hej, {name}!</h1>
+      <header>
+        {editing ? (
+          <input value={tempName} onChange={(e) => setTempName(e.target.value)} />
+        ) : (
+          <h1>Hej, {user?.username || 'Gość'}!</h1>
+        )}
       </header>
 
-      <div className="profile-section">
-        <img src={profilePic} alt="Profilowe" className="profile-pic" />
+      <p>Klasa: {editing ? (
+        <select value={tempClassName} onChange={(e) => setTempClassName(e.target.value)}>
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4</option>
+        </select>
+      ) : (
+        user?.className || '-'
+      )}</p>
 
-        <div className="profile-data">
-          <div className="class-section">
-            <p><strong>Klasa:</strong> {className}</p>
-          </div>
+      <h2>Przedmioty rozszerzone</h2>
+      {editing ? (
+        allSubjects.map((s) => (
+          <label key={s}>
+            <input type="checkbox" checked={tempSelected.includes(s)} onChange={() => toggleSubject(s)} />
+            {s}
+          </label>
+        ))
+      ) : (
+        <ul>{(user?.extendedSubjects || []).map((s) => <li key={s}>{s}</li>)}</ul>
+      )}
 
-          <div className="subjects-section">
-            <div className="subjects-header">
-              <h2>Przedmioty rozszerzone</h2>
-              {isMentor && <span className="flare small-flare">(jesteś mentorem)</span>}
-            </div>
-
-            <ul className="subjects-list">
-              {tempSelected.map((subject) => (
-                <li key={subject}>{subject}</li>
-              ))}
-            </ul>
-          </div>
-
-          <p className="points"><strong>Punkty za pomoc:</strong> {points}</p>
-        </div>
-      </div>
+      {editing ? (
+        <button onClick={saveChanges}>Zapisz</button>
+      ) : (
+        <button onClick={() => setEditing(true)}>Edytuj</button>
+      )}
     </div>
   );
 }
