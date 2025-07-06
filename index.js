@@ -39,11 +39,6 @@ io.on('connection', (socket) => {
     console.log(`Wiadomość w pokoju ${room}: ${message}`);
   });
 
-  socket.on('message', (msg) => {
-  console.log('Odebrano wiadomość:', msg); // ⬅ zobacz co przychodzi
-  setMessages((prev) => [...prev, msg]);
-});
-
   socket.on('disconnect', () => {
     console.log('Rozłączono:', socket.id);
   });

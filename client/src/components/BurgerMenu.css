@@ -1,10 +1,10 @@
 .burger-container {
   position: fixed;
-  top: 0px;      /* mniejsze odsunięcie od góry */
-  right: 0px;    /* mniejsze odsunięcie od prawej */
+  top: 0;
+  right: 0;
+  padding: 8px 12px; /* mały padding, żeby ikonka nie była przy samej krawędzi */
   z-index: 1100;
 }
-
 
 .burger-icon {
   background: none;
@@ -12,23 +12,43 @@
   font-size: 2rem;
   cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
+  color: #000; /* podstawowy kolor */
 }
 
 .burger-menu {
   position: absolute;
   top: 40px;
   right: 0;
-  background: #9aaeb5;
+  background-color: #f0f0f0; /* jasne tło menu, możesz zmienić kolor */
   border: 1px solid #000;
   border-radius: 8px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* lekki cień dla lepszego efektu */
 }
+
 
 .burger-menu a {
   text-decoration: none;
   color: #000;
+  color: white;              /* jasny tekst */
+  border-radius: 5px;        /* lekko zaokrąglone rogi */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  outline: none;
+  color: #000;
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* Responsywność dla mobilki */
+@media (max-width: 768px) {
+  .burger-icon {
+    font-size: 1.5rem; /* mniejsza ikona na mobilce */
+  }
+
+  .burger-container {
+    padding: 6px 10px; /* trochę mniej paddingu na mobilce */
+  }
 }

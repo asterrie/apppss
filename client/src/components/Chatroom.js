@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import './Chatroom.css';
-
-
-const socket = io('https://peerx-chat.onrender.com');
-
-
 
 export default function Chatroom({ room, goBack }) {
   const [message, setMessage] = useState('');
@@ -13,24 +8,29 @@ export default function Chatroom({ room, goBack }) {
   const { subject, level } = room;
   const roomName = `${subject}_${level}`;
 
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    setMessages([]);
-    socket.emit('joinRoom', roomName);
+    socketRef.current = io('https://peerx-chat.onrender.com');
 
-    socket.on('message', (msg) => {
+    socketRef.current.on('message', (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
 
     return () => {
-      socket.off('message');
+      socketRef.current.disconnect();
     };
+  }, []);
+
+  useEffect(() => {
+    if (!socketRef.current) return;
+    setMessages([]);  // wyczyść stare wiadomości
+    socketRef.current.emit('joinRoom', roomName);
   }, [roomName]);
 
   const sendMessage = () => {
     if (message.trim() === '') return;
-    // Wysyłamy wiadomość z polem sender: 'me'
-    socket.emit('message', { room: roomName, message });
+    socketRef.current.emit('message', { room: roomName, message });
     setMessage('');
   };
 
@@ -41,7 +41,6 @@ export default function Chatroom({ room, goBack }) {
 
       <div className="messages">
         {messages.map((msg, idx) => {
-          // Obsługa przypadku gdy msg jest stringiem (np. z backendu)
           const messageText = typeof msg === 'string' ? msg : msg.message || '';
           const sender = typeof msg === 'string' ? 'other' : msg.sender || 'other';
 
