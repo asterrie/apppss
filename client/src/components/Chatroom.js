@@ -2,13 +2,15 @@ import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import './Chatroom.css';
 
-export default function Chatroom({ room, goBack, selectedExtendedSubjects, userName }) {
+export default function Chatroom({ room, goBack, selectedExtendedSubjects }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const { subject, level } = room;
   const roomName = `${subject}_${level}`;
 
   const socketRef = useRef(null);
+
+  const userName = 'Gość'; // Na razie stała nazwa, potem można podpiąć AuthContext
 
   useEffect(() => {
     socketRef.current = io('https://peerx-chat.onrender.com');
@@ -24,7 +26,7 @@ export default function Chatroom({ room, goBack, selectedExtendedSubjects, userN
 
   useEffect(() => {
     if (!socketRef.current) return;
-    setMessages([]); // Wyczyść stare wiadomości
+    setMessages([]);  // wyczyść stare wiadomości
     socketRef.current.emit('joinRoom', roomName);
   }, [roomName]);
 
@@ -44,6 +46,7 @@ export default function Chatroom({ room, goBack, selectedExtendedSubjects, userN
           const messageText = typeof msg === 'string' ? msg : msg.message || '';
           const sender = typeof msg === 'string' ? 'other' : msg.sender || 'other';
 
+          // Sprawdź czy user jest mentorem (w rozszerzeniach) i jest w "Podstawa"
           const isMentor = level === 'Podstawa' && selectedExtendedSubjects?.includes(subject);
 
           return (

@@ -11,37 +11,24 @@ const allSubjects = [
 
 const isMentor = true;
 
-export default function StudentPanel({
-  selectedExtendedSubjects,
-  setSelectedExtendedSubjects,
-  username,
-  setUsername,
-  className,
-  setClassName,
-}) {
+export default function StudentPanel({ selectedExtendedSubjects, setSelectedExtendedSubjects }) {
   const [editing, setEditing] = useState(false);
-
-  // Używamy stanu tymczasowego podczas edycji
   const [tempSelected, setTempSelected] = useState(selectedExtendedSubjects);
-  const [tempName, setTempName] = useState(username);
+
+  const [name, setName] = useState('Gość');
+  const [tempName, setTempName] = useState(name);
+
   const [profilePic, setProfilePic] = useState(defaultProfilePic);
   const [tempProfilePic, setTempProfilePic] = useState(defaultProfilePic);
-  const [tempClassName, setTempClassName] = useState(className || '3');
 
-  const points = 0;
+  const [className, setClassName] = useState('3');
+  const [tempClassName, setTempClassName] = useState('3');
 
-  // Synchronizuj stan tymczasowy gdy propsy się zmieniają
+  const points = 123;
+
   useEffect(() => {
     setTempSelected(selectedExtendedSubjects);
   }, [selectedExtendedSubjects]);
-
-  useEffect(() => {
-    setTempName(username);
-  }, [username]);
-
-  useEffect(() => {
-    setTempClassName(className);
-  }, [className]);
 
   const toggleSubject = (subject) => {
     if (tempSelected.includes(subject)) {
@@ -53,7 +40,7 @@ export default function StudentPanel({
 
   const saveChanges = () => {
     setSelectedExtendedSubjects(tempSelected);
-    setUsername(tempName);
+    setName(tempName);
     setProfilePic(tempProfilePic);
     setClassName(tempClassName);
     setEditing(false);
@@ -68,7 +55,7 @@ export default function StudentPanel({
             <input value={tempName} onChange={(e) => setTempName(e.target.value)} />
           </div>
         ) : (
-          <h1>Hej, {username}!</h1>
+          <h1>Hej, {name}!</h1>
         )}
       </header>
 
@@ -125,7 +112,7 @@ export default function StudentPanel({
               </>
             ) : (
               <ul className="subjects-list">
-                {selectedExtendedSubjects.map((subject) => (
+                {tempSelected.map((subject) => (
                   <li key={subject}>{subject}</li>
                 ))}
               </ul>
